@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עוגיות בוטיק לכבוד שבת | מתוק לשבת</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Rubik & Heebo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FAF7F2',
+                            100: '#F5EFE6',
+                            200: '#E8DEC8',
+                        },
+                        choco: {
+                            600: '#5C3D2E',
+                            800: '#3D2314',
+                            900: '#2C180B',
+                        },
+                        gold: {
+                            400: '#E6C280',
+                            500: '#D4AF37',
+                            600: '#B89028',
+                        }
+                    },
+                    fontFamily: {
+                        heebo: ['Heebo', 'sans-serif'],
+                        rustic: ['Amatic SC', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #FAF7F2;
+        }
+        .rustic-title {
+            font-family: 'Amatic SC', cursive;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5EFE6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+        .glass-nav {
+            background: rgba(250, 247, 242, 0.9);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="text-choco-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-choco-800 text-cream-100 text-sm py-2 px-4 text-center font-medium shadow-inner flex justify-center items-center gap-2">
+        <i class="fa-solid fa-clock text-gold-400"></i>
+        <span>הזמנות לשבת הקרובה נסגרות ביום חמישי בשעה 12:00 | חלוקה ואיסוף בימי שישי</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-40 glass-nav border-b border-cream-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-choco-800 text-gold-400 flex items-center justify-center text-2xl shadow-md border-2 border-gold-500">
+                        <i class="fa-solid fa-cookie-bite"></i>
+                    </div>
+                    <div>
+                        <a href="#" class="rustic-title text-3xl font-bold text-choco-900 tracking-wide block leading-none">עוגיות לשבת</a>
+                        <span class="text-xs text-gold-600 font-medium tracking-wider">אפיית בוטיק ביתית</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 space-x-reverse text-lg font-medium">
+                    <a href="#hero" class="hover:text-gold-600 transition-colors">בית</a>
+                    <a href="#catalog" class="hover:text-gold-600 transition-colors">העוגיות שלנו</a>
+                    <a href="#how-it-works" class="hover:text-gold-600 transition-colors">איך זה עובד?</a>
+                    <a href="#about" class="hover:text-gold-600 transition-colors">קצת עלינו</a>
+                </div>
+
+                <!-- Cart Button -->
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleCart()" class="relative bg-choco-800 text-cream-50 hover:bg-choco-900 px-5 py-2.5 rounded-full shadow-lg transition-all duration-300 flex items-center gap-3 group">
+                        <i class="fa-solid fa-basket-shopping text-gold-400 text-xl group-hover:scale-110 transition-transform"></i>
+                        <span class="font-bold hidden sm:inline">סל הזמנה</span>
+                        <span id="cart-count" class="bg-gold-500 text-choco-900 font-extrabold text-xs px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-choco-800 text-2xl focus:outline-none p-2">
+                        <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cream-100 border-b border-cream-200 px-4 pt-2 pb-4 space-y-2">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-choco-800 font-medium hover:text-gold-600 border-b border-cream-200">בית</a>
+            <a href="#catalog" onclick="toggleMobileMenu()" class="block py-2 text-choco-800 font-medium hover:text-gold-600 border-b border-cream-200">העוגיות שלנו</a>
+            <a href="#how-it-works" onclick="toggleMobileMenu()" class="block py-2 text-choco-800 font-medium hover:text-gold-600 border-b border-cream-200">איך זה עובד?</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-choco-800 font-medium hover:text-gold-600">קצת עלינו</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative bg-gradient-to-b from-cream-100 to-cream-50 py-16 lg:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-center md:text-right">
+                    <span class="inline-block bg-cream-200 text-choco-800 text-sm px-4 py-1.5 rounded-full font-semibold border border-gold-400">
+                        ✨ נאפה באהבה במיוחד ליום שישי
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-choco-900 leading-tight">
+                        עוגיות בוטיק נימוחות <br/>
+                        <span class="text-gold-600 font-extrabold rustic-title text-6xl sm:text-7xl">לכבוד שבת קודש</span>
+                    </h1>
+                    <p class="text-lg text-choco-600 max-w-xl leading-relaxed">
+                        ניחוחות של בית, מרכיבים פרימיום מוקפדים, וטעם של עוד. 
+                        הזמינו עכשיו מארזי עוגיות שיהפכו את שולחן השבת שלכם לחוויה מתוקה ובלתי נשכחת.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
+                        <a href="#catalog" class="bg-gold-500 hover:bg-gold-600 text-choco-900 font-bold px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 text-center transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-utensils ml-2"></i> להזמנה לשבת
+                        </a>
+                        <a href="#how-it-works" class="border-2 border-choco-800 text-choco-800 hover:bg-choco-800 hover:text-cream-50 font-bold px-8 py-4 rounded-xl transition-all duration-300 text-center">
+                            איך זה עובד?
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="relative">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-gold-400 to-choco-600 rounded-3xl blur-lg opacity-30 animate-pulse"></div>
+                    <img src="עוגיייההה.jpg" 
+                         alt="עוגיות לשבת" 
+                         class="relative rounded-2xl shadow-2xl w-full object-cover h-[380px] sm:h-[450px] border-4 border-cream-100 transform hover:scale-[1.01] transition-transform duration-500"
+                         onerror="handleImageFallback(this, 'עוגיייההה', 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop')">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shabbat Schedule Banner -->
+    <section class="bg-choco-800 text-cream-50 py-8 border-y-4 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="flex flex-col items-center p-4 rounded-lg bg-choco-900/50 border border-choco-600">
+                    <div class="w-12 h-12 bg-gold-500 text-choco-900 rounded-full flex items-center justify-center text-xl font-bold mb-3">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-gold-400 mb-1">סגירת הזמנות</h3>
+                    <p class="text-sm text-cream-200">יום חמישי בשעה 12:00 בצהריים</p>
+                </div>
+                <div class="flex flex-col items-center p-4 rounded-lg bg-choco-900/50 border border-choco-600">
+                    <div class="w-12 h-12 bg-gold-500 text-choco-900 rounded-full flex items-center justify-center text-xl font-bold mb-3">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-gold-400 mb-1">אפייה טרייה</h3>
+                    <p class="text-sm text-cream-200">אפייה מיוחדת בליל חמישי ובשישי לפנות בוקר</p>
+                </div>
+                <div class="flex flex-col items-center p-4 rounded-lg bg-choco-900/50 border border-choco-600">
+                    <div class="w-12 h-12 bg-gold-500 text-choco-900 rounded-full flex items-center justify-center text-xl font-bold mb-3">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-gold-400 mb-1">איסוף / משלוחים</h3>
+                    <p class="text-sm text-cream-200">ביום שישי בבוקר (8:00 - 13:00)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="rustic-title text-5xl font-bold text-choco-900 mb-2">תפריט העוגיות לשבת</h2>
+            <p class="text-choco-600 font-medium">המארזים שלנו נאפים בכמויות מוגבלות מחומרי הגלם המשובחים ביותר</p>
+            
+            <!-- Category Filter -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6" id="category-filters">
+                <button onclick="filterCategory('all')" class="cat-btn active bg-choco-800 text-gold-400 px-5 py-2 rounded-full text-sm font-bold shadow transition-all">הכל</button>
+                <button onclick="filterCategory('chocolate')" class="cat-btn bg-cream-200 text-choco-800 hover:bg-choco-800 hover:text-cream-50 px-5 py-2 rounded-full text-sm font-bold shadow transition-all">שוקולד</button>
+                <button onclick="filterCategory('traditional')" class="cat-btn bg-cream-200 text-choco-800 hover:bg-choco-800 hover:text-cream-50 px-5 py-2 rounded-full text-sm font-bold shadow transition-all">מסורתי ומזרחי</button>
+                <button onclick="filterCategory('special')" class="cat-btn bg-cream-200 text-choco-800 hover:bg-choco-800 hover:text-cream-50 px-5 py-2 rounded-full text-sm font-bold shadow transition-all">מיוחדים</button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
+            <!-- Dynamic Injection via JavaScript -->
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 bg-cream-100 border-t border-cream-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="rustic-title text-5xl font-bold text-choco-900 mb-2">איך מבצעים הזמנה?</h2>
+                <p class="text-choco-600">תהליך פשוט ומהיר להבטחת העוגיות שלכם לשבת</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                <!-- Step 1 -->
+                <div class="bg-cream-50 p-6 rounded-2xl shadow-sm border border-cream-200 text-center relative flex flex-col items-center">
+                    <span class="w-10 h-10 bg-gold-500 text-choco-900 font-bold rounded-full flex items-center justify-center text-lg mb-4 shadow">1</span>
+                    <h3 class="font-bold text-xl mb-2 text-choco-800">בוחרים עוגיות</h3>
+                    <p class="text-sm text-choco-600">מעיינים בקטלוג ומוסיפים את המארזים האהובים עליכם לעגלה.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="bg-cream-50 p-6 rounded-2xl shadow-sm border border-cream-200 text-center relative flex flex-col items-center">
+                    <span class="w-10 h-10 bg-gold-500 text-choco-900 font-bold rounded-full flex items-center justify-center text-lg mb-4 shadow">2</span>
+                    <h3 class="font-bold text-xl mb-2 text-choco-800">ממלאים פרטים</h3>
+                    <p class="text-sm text-choco-600">פותחים את העגלה, מזינים שם, טלפון ואופציית איסוף או משלוח.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="bg-cream-50 p-6 rounded-2xl shadow-sm border border-cream-200 text-center relative flex flex-col items-center">
+                    <span class="w-10 h-10 bg-gold-500 text-choco-900 font-bold rounded-full flex items-center justify-center text-lg mb-4 shadow">3</span>
+                    <h3 class="font-bold text-xl mb-2 text-choco-800">שולחים ב-WhatsApp</h3>
+                    <p class="text-sm text-choco-600">בלחיצת כפתור ההזמנה נשלחת ישירות אלינו לוואטסאפ לאישור מהיר.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="bg-cream-50 p-6 rounded-2xl shadow-sm border border-cream-200 text-center relative flex flex-col items-center">
+                    <span class="w-10 h-10 bg-gold-500 text-choco-900 font-bold rounded-full flex items-center justify-center text-lg mb-4 shadow">4</span>
+                    <h3 class="font-bold text-xl mb-2 text-choco-800">נהנים בשבת!</h3>
+                    <p class="text-sm text-choco-600">אוספים או מקבלים את המארז כשהוא טרי, חם ומוכן לכבוד שבת.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-choco-900 text-cream-50 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center gap-8">
+            <div class="md:w-1/2 space-y-4">
+                <span class="text-gold-400 font-bold text-sm tracking-widest uppercase">אודות המאפייה</span>
+                <h2 class="rustic-title text-4xl sm:text-5xl font-bold text-cream-100">אפייה מכל הלב לכבוד שבת</h2>
+                <p class="text-cream-200 leading-relaxed">
+                    הכל התחיל מהאהבה לריחות של יום שישי בבית אמא. העוגיות שלנו נעשות בעבודת יד מוקפדת, ללא חומרים משמרים, עם החמאה המשובחת ביותר, שוקולד איכותי ותבלינים ארומטיים.
+                </p>
+                <p class="text-cream-200 leading-relaxed">
+                    מדי שבוע אנחנו בוחרים מחדש את חומרי הגלם הטריים ביותר כדי להבטיח שכל ביס שלכם בסעודת השבת יהיה חוויה מתוקה ומנחמת.
+                </p>
+            </div>
+            <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=400&auto=format&fit=crop" class="rounded-xl shadow-lg object-cover h-48 w-full" alt="אפייה">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop" class="rounded-xl shadow-lg object-cover h-48 w-full mt-6" alt="עוגיות טריות">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-choco-900 text-cream-200 border-t border-choco-800 py-8 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center items-center gap-2 mb-3">
+                <i class="fa-solid fa-cookie-bite text-gold-500 text-2xl"></i>
+                <span class="rustic-title text-3xl font-bold text-cream-50">עוגיות לשבת</span>
+            </div>
+            <p class="mb-4">אפיית בוטיק איכותית לכבוד שבת קודש | כשר למהדרין 🌾</p>
+            <div class="flex justify-center space-x-4 space-x-reverse text-gold-400 text-xl mb-6">
+                <a href="#" class="hover:text-cream-50 transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="hover:text-cream-50 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-cream-50 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+            <p class="text-xs text-choco-600">© כל הזכויות שמורות לעוגיות לשבת. שנזכה לשבתות מתוקות!</p>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer (Modal Overlay) -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div onclick="toggleCart()" class="fixed inset-0 bg-choco-900/60 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-y-0 left-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-cream-50 shadow-2xl flex flex-col justify-between">
+                
+                <!-- Drawer Header -->
+                <div class="p-6 bg-choco-800 text-cream-50 flex items-center justify-between shadow-md">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-basket-shopping text-gold-400 text-2xl"></i>
+                        <h2 class="text-xl font-bold">סל ההזמנות לשבת</h2>
+                    </div>
+                    <button onclick="toggleCart()" class="text-cream-200 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Drawer Content (Items List) -->
+                <div class="p-6 overflow-y-auto flex-1 space-y-4" id="cart-items-container">
+                    <!-- Dynamic Cart Content -->
+                </div>
+
+                <!-- Order Form & Checkout -->
+                <div class="p-6 bg-cream-100 border-t border-cream-200 space-y-4 shadow-lg">
+                    <!-- Total Price -->
+                    <div class="flex justify-between items-center text-lg font-bold text-choco-900 border-b border-cream-200 pb-3">
+                        <span>סה"כ לתשלום:</span>
+                        <span id="cart-total-price" class="text-2xl text-choco-800">₪0</span>
+                    </div>
+
+                    <!-- Customer Form -->
+                    <form id="checkout-form" onsubmit="submitOrder(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-choco-800 mb-1">שם מלא *</label>
+                            <input type="text" id="cust-name" required placeholder="ישראל ישראלי" class="w-full px-3 py-2 rounded-lg border border-cream-200 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-choco-800 mb-1">מספר טלפון *</label>
+                            <input type="tel" id="cust-phone" required placeholder="050-0000000" class="w-full px-3 py-2 rounded-lg border border-cream-200 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-choco-800 mb-1">אופן קבלה *</label>
+                            <select id="cust-delivery" class="w-full px-3 py-2 rounded-lg border border-cream-200 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm bg-white">
+                                <option value="איסוף עצמי ביום שישי (8:00-13:00)">איסוף עצמי ביום שישי</option>
+                                <option value="משלוח עד הבית (בימי שישי בלבד)">משלוח עד הבית (+₪25)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-choco-800 mb-1">הערות להזמנה / כתובת למשלוח</label>
+                            <textarea id="cust-notes" rows="2" placeholder="כתובת מדויקת או בקשות מיוחדות..." class="w-full px-3 py-2 rounded-lg border border-cream-200 focus:outline-none focus:ring-2 focus:ring-gold-500 text-sm"></textarea>
+                        </div>
+
+                        <!-- WhatsApp Submit Button -->
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center gap-2 text-base">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <span>שליחת הזמנה ב-WhatsApp</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-choco-900 text-cream-50 border-2 border-gold-500 px-5 py-3 rounded-xl shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 z-50 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-gold-400 text-xl"></i>
+        <span id="toast-msg" class="font-medium">המוצר נוסף בהצלחה!</span>
+    </div>
+
+    <!-- Floating WhatsApp Widget -->
+    <div class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-2 group">
+        <!-- Floating Chat Popup Bubble -->
+        <a href="https://wa.me/972584050599?text=%D7%A9%D7%9C%D7%95%D7%9D!%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%97%20%D7%9C%D7%91%D7%A8%D7%A8%20%D7%A2%D7%9C%20%D7%94%D7%A2%D7%95%D7%90%D7%92%D7%99%D7%95%D7%AA%20%D7%9C%D7%A9%D7%91%D7%AA" 
+           target="_blank" 
+           class="bg-white text-choco-900 text-xs font-bold px-4 py-2.5 rounded-2xl shadow-xl border border-emerald-200 flex items-center gap-2 transform transition-all duration-300 hover:scale-105 animate-bounce mb-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>שלום! רוצה להזמין עוגיות לשבת? 🍪</span>
+        </a>
+
+        <!-- Floating WhatsApp Button -->
+        <a href="https://wa.me/972584050599?text=%D7%A9%D7%9C%D7%95%D7%9D!%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%97%20%D7%9C%D7%91%D7%A8%D7%A8%20%D7%A2%D7%9C%D7%94%D7%A2%D7%95%D7%90%D7%92%D7%99%D7%95%D7%AA%20%D7%9C%D7%A9%D7%91%D7%AA" 
+           target="_blank" 
+           aria-label="צ'אט ב-WhatsApp"
+           class="bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 border-2 border-white">
+            <i class="fa-brands fa-whatsapp text-3xl"></i>
+        </a>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        // Helper function for trying different file extensions if image fails to load
+        function handleImageFallback(imgElement, baseName, defaultUnsplashUrl) {
+            const extensions = ['.png', '.jpeg', '.webp', '.PNG', '.JPG'];
+            let attempt = parseInt(imgElement.getAttribute('data-attempt') || '0');
+            
+            if (attempt < extensions.length) {
+                imgElement.setAttribute('data-attempt', attempt + 1);
+                imgElement.src = baseName + extensions[attempt];
+            } else {
+                imgElement.src = defaultUnsplashUrl;
+            }
+        }
+
+        // Products Database
+        const products = [
+            {
+                id: 1,
+                name: "אלפחורס נימוחות",
+                category: "special",
+                price: 25,
+                unit: "מארז מיוחד",
+                desc: "עוגיות עמילן תירס נימוחות הנמסות בפה במילוי נדיב של ריבת חלב עשירה ומצופות קוקוס.",
+                image: "עוגיייההה.jpg",
+                fallbackUrl: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 2,
+                name: "עוגיות שוקולד צ'יפס ומלח ים",
+                category: "chocolate",
+                price: 45,
+                unit: "מארז (250 גרם)",
+                desc: "שוקולד מריר איכותי 70%, שוקולד חלב ומאזן נגיעות מלח ים אטלנטי. פריכות מבחוץ ורכות מבפנים.",
+                image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 3,
+                name: "רולדת תמרים ואגוזי מלך",
+                category: "traditional",
+                price: 50,
+                unit: "מארז פס (300 גרם)",
+                desc: "בצק פריך נימוח במילוי תמרי מג'הול טבעיים, אגוזי מלך פריכים ותבלינים ארומטיים לכבוד שבת.",
+                image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 4,
+                name: "מעמול פיסטוק ומי זהר",
+                category: "traditional",
+                price: 55,
+                unit: "מארז (10 יחידות)",
+                desc: "מעמול מסורתי עשוי סולת וחמאה, במילוי פיסטוק חלבי משובח ונגיעת מי זהר מעודנת.",
+                image: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 5,
+                name: "עוגיות שוקולד מושלגות",
+                category: "chocolate",
+                price: 42,
+                unit: "מארז (250 גרם)",
+                desc: "סדוקות ומושלגות באבקת סוכר, במרקם פאדג' שוקולדי עשיר במיוחד שילדים ומבוגרים אוהבים.",
+                image: "https://images.unsplash.com/photo-1605807646983-377bc5a76493?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 6,
+                name: "עוגיות שקדים ולימון",
+                category: "special",
+                price: 46,
+                unit: "מארז (200 גרם)",
+                desc: "עוגיות שקדים איטלקיות מוזהבות, פריכות ומעוטרות בגרידת לימון טרי ושקדים פרוסים.",
+                image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600&auto=format&fit=crop"
+            }
+        ];
+
+        // Cart State
+        let cart = [];
+
+        // Render Catalog Products
+        function renderProducts(items) {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = items.map(p => `
+                <div class="bg-cream-50 rounded-2xl overflow-hidden shadow-lg border border-cream-200 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative overflow-hidden h-52">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                 onerror="handleImageFallback(this, '${p.image.split('.')[0]}', '${p.fallbackUrl || 'https://placehold.co/600x400/3D2314/E6C280?text=' + encodeURIComponent(p.name)}')">
+                            <span class="absolute top-3 right-3 bg-choco-800 text-gold-400 font-bold text-xs px-3 py-1.5 rounded-full shadow border border-gold-500">
+                                ${p.unit}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl text-choco-900 mb-2">${p.name}</h3>
+                            <p class="text-choco-600 text-sm leading-relaxed mb-4">${p.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-cream-100 mt-auto">
+                        <div>
+                            <span class="text-xs text-choco-600 block">מחיר:</span>
+                            <span class="text-2xl font-black text-choco-900">₪${p.price}</span>
+                        </div>
+                        <button onclick="addToCart(${p.id})" class="bg-choco-800 hover:bg-choco-900 text-gold-400 font-bold px-4 py-2.5 rounded-xl shadow transition-all duration-200 flex items-center gap-2 group-hover:bg-gold-500 group-hover:text-choco-900">
+                            <i class="fa-solid fa-cart-plus"></i> הוסף לעגלה
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter Products
+        function filterCategory(category) {
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-choco-800', 'text-gold-400');
+                btn.classList.add('bg-cream-200', 'text-choco-800');
+            });
+            event.target.classList.remove('bg-cream-200', 'text-choco-800');
+            event.target.classList.add('bg-choco-800', 'text-gold-400');
+
+            if (category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        // Cart Actions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`"${product.name}" נוספה לעגלה!`);
+        }
+
+        function changeQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = totalItems;
+
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-choco-600 space-y-3">
+                        <i class="fa-solid fa-basket-shopping text-5xl text-cream-200"></i>
+                        <p class="font-medium">העגלה שלך ריקה כרגע.</p>
+                        <a href="#catalog" onclick="toggleCart()" class="text-gold-600 font-bold underline text-sm inline-block">עבור לתפריט המוצרים</a>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-cream-200 shadow-sm">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover" onerror="this.src='https://placehold.co/100x100/3D2314/E6C280?text=עוגיה'">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-choco-900 text-sm mb-1">${item.name}</h4>
+                            <span class="text-xs text-choco-600 block">₪${item.price} ליחידה</span>
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="changeQuantity(${item.id}, -1)" class="w-6 h-6 bg-cream-200 rounded text-choco-800 font-bold text-xs hover:bg-cream-300">-</button>
+                                <span class="font-bold text-sm px-1">${item.quantity}</span>
+                                <button onclick="changeQuantity(${item.id}, 1)" class="w-6 h-6 bg-cream-200 rounded text-choco-800 font-bold text-xs hover:bg-cream-300">+</button>
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <span class="font-black text-choco-900 block text-base">₪${item.price * item.quantity}</span>
+                            <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700 text-xs mt-2">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('cart-total-price').innerText = `₪${totalPrice}`;
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            if (cart.length === 0) {
+                alert('העגלה שלך ריקה! יש להוסיף מוצרים לפני שליחת הזמנה.');
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const delivery = document.getElementById('cust-delivery').value;
+            const notes = document.getElementById('cust-notes').value;
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            let message = `*הזמנה חדשה לשבת קודש!* 🍪✨\n\n`;
+            message += `*פרטי לקוח:*\n`;
+            message += `• שם: ${name}\n`;
+            message += `• טלפון: ${phone}\n`;
+            message += `• אופן קבלה: ${delivery}\n`;
+            if (notes) message += `• הערות/כתובת: ${notes}\n`;
+            
+            message += `\n*פירוט ההזמנה:*\n`;
+            cart.forEach(item => {
+                message += `• ${item.name} (${item.quantity} מארזים) - ₪${item.price * item.quantity}\n`;
+            });
+
+            message += `\n*סה"כ לתשלום:* ₪${totalPrice}\n\n`;
+            message += `תודה רבה ושבת שלום! ❤️`;
+
+            const bakeryPhone = "972584050599"; 
+            const encodedMessage = encodeURIComponent(message);
+            
+            window.open(`https://wa.me/${bakeryPhone}?text=${encodedMessage}`, '_blank');
+        }
+
+        window.onload = function() {
+            renderProducts(products);
+            updateCartUI();
+        };
+    </script>
+</body>
+</html>
